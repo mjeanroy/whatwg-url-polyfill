@@ -30,3 +30,4 @@ import './file-state.test';
 import './fragment-state.test';
 import './no-scheme-state.test';
 import './path-or-authority-state.test';
+import './path-start-state.test';
