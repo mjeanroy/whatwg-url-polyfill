@@ -35,3 +35,4 @@ import './relative-slash-state.test';
 import './scheme-start-state.test';
 import './scheme-state.test';
 import './special-authority-ignore-slashes-state.test';
+import './special-authority-slashes-state.test';
