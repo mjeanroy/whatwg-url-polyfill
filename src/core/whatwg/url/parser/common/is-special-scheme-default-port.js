@@ -22,21 +22,20 @@
  * SOFTWARE.
  */
 
-import './is-ascii-alpha-numeric.test';
-import './is-ascii-alpha.test';
-import './is-ascii-digit.test';
-import './is-ascii-hex-digit.test';
-import './is-c0-control-char.test';
-import './is-c0-control-percent-encode-set.test';
-import './is-fragment-percent-encode-set.test';
-import './is-normalized-windows-drive-letter.test';
-import './is-space-char.test';
-import './is-special-scheme-default-port.test';
-import './is-special-scheme.test';
-import './is-special-url.test';
-import './is-url-code-point.test';
-import './is-windows-drive-letter.test';
-import './percent-encode.test';
-import './shorten-url-path.test';
-import './starts-with-ascii-hex-digit.test';
-import './starts-with-windows-drive-letter.test';
+import {SPECIAL_SCHEMES} from './special-schemes';
+
+/**
+ * Check if a port is the default port of special scheme.
+ *
+ * @param {string} scheme The given scheme.
+ * @param {number} port The given port.
+ * @return {boolean} `true` if `port` is the default port of `scheme`, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#special-scheme
+ */
+export function isSpecialSchemeDefaultPort(scheme, port) {
+  if (!scheme) {
+    return false;
+  }
+
+  return SPECIAL_SCHEMES[scheme.toLowerCase()] === port;
+}

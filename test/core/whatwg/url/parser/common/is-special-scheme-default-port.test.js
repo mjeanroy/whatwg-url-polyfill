@@ -22,21 +22,24 @@
  * SOFTWARE.
  */
 
-import './is-ascii-alpha-numeric.test';
-import './is-ascii-alpha.test';
-import './is-ascii-digit.test';
-import './is-ascii-hex-digit.test';
-import './is-c0-control-char.test';
-import './is-c0-control-percent-encode-set.test';
-import './is-fragment-percent-encode-set.test';
-import './is-normalized-windows-drive-letter.test';
-import './is-space-char.test';
-import './is-special-scheme-default-port.test';
-import './is-special-scheme.test';
-import './is-special-url.test';
-import './is-url-code-point.test';
-import './is-windows-drive-letter.test';
-import './percent-encode.test';
-import './shorten-url-path.test';
-import './starts-with-ascii-hex-digit.test';
-import './starts-with-windows-drive-letter.test';
+import {isSpecialSchemeDefaultPort} from 'src/core/whatwg/url/parser/common/is-special-scheme-default-port';
+
+describe('isSpecialScheme', () => {
+  it('should return true with a special scheme', () => {
+    expect(isSpecialSchemeDefaultPort('ftp', 21)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('gopher', 70)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('http', 80)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('https', 443)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('ws', 80)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('wss', 443)).toBe(true);
+  });
+
+  it('should return true with an upper case special scheme', () => {
+    expect(isSpecialSchemeDefaultPort('FTP', 21)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('GOPHER, 70')).toBe(true);
+    expect(isSpecialSchemeDefaultPort('HTTP', 80)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('HTTPS', 443)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('WS', 80)).toBe(true);
+    expect(isSpecialSchemeDefaultPort('WSS', 443)).toBe(true);
+  });
+});
