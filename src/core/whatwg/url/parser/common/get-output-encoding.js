@@ -22,7 +22,21 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+/**
+ * The `get-output-encoding` algorithm.
+ * Basically:
+ *  - If encoding is replacement, UTF-16BE, or UTF-16LE, return UTF-8.
+ *  - Otherwise, return parameter.
+ *
+ * @param {string} encoding Input encoding.
+ * @return {string} Output encoding.
+ * @see https://encoding.spec.whatwg.org/#get-an-output-encoding
+ */
+export function getOutputEncoding(encoding) {
+  // If encoding is replacement, UTF-16BE, or UTF-16LE, return UTF-8.
+  if (encoding === 'replacement' || encoding === 'UTF-16BE' || encoding === 'UTF-16LE') {
+    return 'UTF-8';
+  }
+
+  return encoding;
+}

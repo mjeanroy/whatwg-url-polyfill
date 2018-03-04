@@ -22,7 +22,19 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {newEmptyUrl} from 'src/core/whatwg/url/parser/url';
+
+describe('url', () => {
+  it('should create new empty url', () => {
+    expect(newEmptyUrl()).toEqual({
+      scheme: '',
+      username: '',
+      password: '',
+      host: null,
+      port: null,
+      path: [],
+      query: null,
+      fragment: null,
+    });
+  });
+});

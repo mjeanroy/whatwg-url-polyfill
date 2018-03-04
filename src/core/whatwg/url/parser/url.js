@@ -22,7 +22,21 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+/**
+ * Create new empty URL Object.
+ *
+ * @return {Object} Empty URL.
+ * @see https://url.spec.whatwg.org/#concept-url
+ */
+export function newEmptyUrl() {
+  return {
+    scheme: '',
+    username: '',
+    password: '',
+    host: null,
+    port: null,
+    path: [],
+    query: null,
+    fragment: null,
+  };
+}

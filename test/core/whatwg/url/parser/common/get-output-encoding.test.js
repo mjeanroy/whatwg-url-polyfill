@@ -22,7 +22,16 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {getOutputEncoding} from 'src/core/whatwg/url/parser/common/get-output-encoding';
+
+describe('getOutputEncoding', () => {
+  it('should get output encoding', () => {
+    expect(getOutputEncoding('UTF-8')).toBe('UTF-8');
+    expect(getOutputEncoding('replacement')).toBe('UTF-8');
+    expect(getOutputEncoding('UTF-16BE')).toBe('UTF-8');
+    expect(getOutputEncoding('UTF-16LE')).toBe('UTF-8');
+
+    expect(getOutputEncoding('UTF-16')).toBe('UTF-16');
+    expect(getOutputEncoding('ASCII')).toBe('ASCII');
+  });
+});

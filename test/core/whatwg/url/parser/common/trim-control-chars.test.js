@@ -22,7 +22,31 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {trimControlChars} from 'src/core/whatwg/url/parser/common/trim-control-chars';
+
+describe('trimControlChars', () => {
+  it('should not change empty string', () => {
+    expect(trimControlChars('')).toBe('');
+  });
+
+  it('should trim string containing only space', () => {
+    expect(trimControlChars('    ')).toBe('');
+  });
+
+  it('should not change simple input string', () => {
+    expect(trimControlChars('foo')).toBe('foo');
+  });
+
+  it('should trim spaces from input string', () => {
+    expect(trimControlChars('  foo  ')).toBe('foo');
+  });
+
+  it('should trim C0 characters from input string', () => {
+    for (let i = 0; i < 32; ++i) {
+      const hex = parseInt(i.toString(16), 16);
+      const c = String.fromCharCode(hex);
+      const input = `${c}foo${c}`;
+      expect(trimControlChars(input)).toBe('foo');
+    }
+  });
+});

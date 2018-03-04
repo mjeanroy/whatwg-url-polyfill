@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import './get-output-encoding.test';
 import './is-ascii-alpha-numeric.test';
 import './is-ascii-alpha.test';
 import './is-ascii-digit.test';
@@ -37,6 +38,8 @@ import './is-special-url.test';
 import './is-url-code-point.test';
 import './is-windows-drive-letter.test';
 import './percent-encode.test';
+import './remove-tab-and-new-line.test';
 import './shorten-url-path.test';
 import './starts-with-ascii-hex-digit.test';
 import './starts-with-windows-drive-letter.test';
+import './trim-control-chars.test';
