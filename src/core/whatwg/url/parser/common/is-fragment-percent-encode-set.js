@@ -22,20 +22,24 @@
  * SOFTWARE.
  */
 
-import './is-ascii-alpha-numeric.test';
-import './is-ascii-alpha.test';
-import './is-ascii-digit.test';
-import './is-ascii-hex-digit.test';
-import './is-c0-control-char.test';
-import './is-c0-control-percent-encode-set.test';
-import './is-fragment-percent-encode-set.test';
-import './is-normalized-windows-drive-letter.test';
-import './is-space-char.test';
-import './is-special-scheme.test';
-import './is-special-url.test';
-import './is-url-code-point.test';
-import './is-windows-drive-letter.test';
-import './percent-encode.test';
-import './shorten-url-path.test';
-import './starts-with-ascii-hex-digit.test';
-import './starts-with-windows-drive-letter.test';
+import {isChar} from '../../../../lang/is-char';
+import {isNil} from '../../../../lang/is-nil';
+import {isSpaceChar} from './is-space-char';
+import {isC0ControlPercentEncodeSet} from './is-c0-control-percent-encode-set';
+
+/**
+ * Check if the given character is part of the fragment percent encode set.
+ *
+ * @param {number} c The code point to check.
+ * @return {boolean} `true` if code point is part of the fragment percent encode set, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#fragment-percent-encode-set
+ */
+export function isFragmentPercentEncodeSet(c) {
+  if (isNil(c)) {
+    return false;
+  }
+
+  // The fragment percent-encode set is the C0 control percent-encode set
+  // and U+0020 SPACE, U+0022 ("), U+003C (<), U+003E (>), and U+0060 (`).
+  return isC0ControlPercentEncodeSet(c) || isSpaceChar(c) || isChar(c, '"') || isChar(c, '<') || isChar(c, '>') || isChar(c, '`');
+}

@@ -26,8 +26,7 @@
 
 import {isChar} from '../../../../lang/is-char';
 import {isNil} from '../../../../lang/is-nil';
-import {isC0ControlChar} from '../common/is-c0-control-char';
-import {isSpaceChar} from '../common/is-space-char';
+import {isFragmentPercentEncodeSet} from '../common/is-fragment-percent-encode-set';
 import {isSpecialUrl} from '../common/is-special-url';
 import {percentEncode} from '../common/percent-encode';
 import {FAILURE} from './failure';
@@ -106,34 +105,6 @@ export function authorityState(sm, c) {
   else {
     sm.buffer += c;
   }
-}
-
-/**
- * Check if the given character is part of the C0 Control and percent encode set.
- *
- * @param {number} c The code point to check.
- * @return {boolean} `true` if code point is part of the C0 Control and percent encode set, `false` otherwise.
- * @see https://url.spec.whatwg.org/#c0-control-percent-encode-set
- */
-function isC0ControlPercentEncodeSet(c) {
-  return isC0ControlChar(c);
-}
-
-/**
- * Check if the given character is part of the fragment percent encode set.
- *
- * @param {number} c The code point to check.
- * @return {boolean} `true` if code point is part of the fragment percent encode set, `false` otherwise.
- * @see https://url.spec.whatwg.org/#fragment-percent-encode-set
- */
-function isFragmentPercentEncodeSet(c) {
-  // The fragment percent-encode set is the C0 control percent-encode set
-  // and U+0020 SPACE, U+0022 ("), U+003C (<), U+003E (>), and U+0060 (`).
-  return isC0ControlPercentEncodeSet(c) || isSpaceChar(c) ||
-    isChar(c, '"') ||
-    isChar(c, '<') ||
-    isChar(c, '>') ||
-    isChar(c, '`');
 }
 
 /**
