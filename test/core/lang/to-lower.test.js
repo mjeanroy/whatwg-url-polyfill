@@ -22,21 +22,16 @@
  * SOFTWARE.
  */
 
-import './clone.test';
-import './code-point-at.test';
-import './for-each.test';
-import './has.test';
-import './is-boolean.test';
-import './is-char.test';
-import './is-function.test';
-import './is-nil.test';
-import './is-null.test';
-import './is-number.test';
-import './is-primitive.test';
-import './is-string.test';
-import './is-undefined.test';
-import './is.test';
-import './keys.test';
-import './size.test';
-import './to-code-point.test';
-import './to-lower.test';
+import {toLower} from 'src/core/lang/to-lower';
+
+describe('toLower', () => {
+  it('should return lowercased string', () => {
+    expect(toLower('foo')).toBe('foo');
+    expect(toLower('FOO')).toBe('foo');
+    expect(toLower('Foo')).toBe('foo');
+
+    expect(toLower(undefined)).toBe(undefined);
+    expect(toLower(null)).toBe(null);
+    expect(toLower('')).toBe('');
+  });
+});

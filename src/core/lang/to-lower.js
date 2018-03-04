@@ -22,21 +22,16 @@
  * SOFTWARE.
  */
 
-import './clone.test';
-import './code-point-at.test';
-import './for-each.test';
-import './has.test';
-import './is-boolean.test';
-import './is-char.test';
-import './is-function.test';
-import './is-nil.test';
-import './is-null.test';
-import './is-number.test';
-import './is-primitive.test';
-import './is-string.test';
-import './is-undefined.test';
-import './is.test';
-import './keys.test';
-import './size.test';
-import './to-code-point.test';
-import './to-lower.test';
+/**
+ * Return the lowercase value of given `string`.
+ *
+ * @param {string} value The input string.
+ * @return {string} The lowercase output string.
+ */
+export function toLower(value) {
+  if (!value) {
+    return value;
+  }
+
+  return value.toLowerCase();
+}

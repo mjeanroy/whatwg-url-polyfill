@@ -32,3 +32,4 @@ import './no-scheme-state.test';
 import './path-or-authority-state.test';
 import './path-start-state.test';
 import './relative-slash-state.test';
+import './scheme-start-state.test';
