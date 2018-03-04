@@ -22,18 +22,34 @@
  * SOFTWARE.
  */
 
-import './is-ascii-alpha-numeric.test';
-import './is-ascii-alpha.test';
-import './is-ascii-digit.test';
-import './is-ascii-hex-digit.test';
-import './is-c0-control-char.test';
-import './is-c0-control-percent-encode-set.test';
-import './is-normalized-windows-drive-letter.test';
-import './is-space-char.test';
-import './is-special-scheme.test';
-import './is-special-url.test';
-import './is-url-code-point.test';
-import './is-windows-drive-letter.test';
-import './percent-encode.test';
-import './starts-with-ascii-hex-digit.test';
-import './starts-with-windows-drive-letter.test';
+import {isChar} from '../../../../lang/is-char';
+import {isWindowsDriveLetter} from './is-windows-drive-letter';
+
+/**
+ * Check if a string input starts with a windows drive letter.
+ *
+ * @param {string} input The input string.
+ * @return {boolean} `true` if input starts with a windows drive letter, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#start-with-a-windows-drive-letter
+ */
+export function startsWithWindowsDriveLetter(input) {
+  // A string starts with a Windows drive letter if all of the following are true:
+
+  // - its length is greater than or equal to 2
+  if (!input || input.length < 2) {
+    return false;
+  }
+
+  // - its first two code points are a Windows drive letter
+  if (!isWindowsDriveLetter(input.slice(0, 2))) {
+    return false;
+  }
+
+  // - its length is 2 or its third code point is U+002F (/), U+005C (\), U+003F (?), or U+0023 (#).
+  if (input.length === 2) {
+    return true;
+  }
+
+  const third = input[2];
+  return isChar(third, '/') || isChar(third, '\\') || isChar(third, '?') || isChar(third, '#');
+}

@@ -22,18 +22,18 @@
  * SOFTWARE.
  */
 
-import './is-ascii-alpha-numeric.test';
-import './is-ascii-alpha.test';
-import './is-ascii-digit.test';
-import './is-ascii-hex-digit.test';
-import './is-c0-control-char.test';
-import './is-c0-control-percent-encode-set.test';
-import './is-normalized-windows-drive-letter.test';
-import './is-space-char.test';
-import './is-special-scheme.test';
-import './is-special-url.test';
-import './is-url-code-point.test';
-import './is-windows-drive-letter.test';
-import './percent-encode.test';
-import './starts-with-ascii-hex-digit.test';
-import './starts-with-windows-drive-letter.test';
+import {isChar} from '../../../../lang/is-char';
+import {isWindowsDriveLetter} from './is-windows-drive-letter';
+
+/**
+ * Check if input is a windows drive letter.
+ *
+ * @param {string} input The input string.
+ * @return {boolean} `true` if `input` is a windows drive letter, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#windows-drive-letter
+ */
+export function isNormalizedWindowsDriveLetter(input) {
+  // A Windows drive letter is two code points, of which the first is an ASCII
+  // alpha and the second is either U+003A (:) or U+007C (|).
+  return isWindowsDriveLetter(input) && isChar(input[1], ':');
+}
