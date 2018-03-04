@@ -24,7 +24,6 @@
 
 import './authority-state.test';
 import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
 import './file-slash-state.test';
 import './file-state.test';
 import './fragment-state.test';

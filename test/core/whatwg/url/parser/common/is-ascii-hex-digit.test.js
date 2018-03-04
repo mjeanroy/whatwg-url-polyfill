@@ -24,7 +24,7 @@
 
 import {isAsciiHexDigit} from 'src/core/whatwg/url/parser/common/is-ascii-hex-digit';
 
-describe('isAsciiDisAsciiHexDigitigit', () => {
+describe('isAsciiHexDigit', () => {
   it('should return false nil or the empty string', () => {
     expect(isAsciiHexDigit(null)).toBe(false);
     expect(isAsciiHexDigit(undefined)).toBe(false);

@@ -24,6 +24,7 @@
 
 import './clone.test';
 import './code-point-at.test';
+import './every.test';
 import './for-each.test';
 import './has.test';
 import './is-boolean.test';
@@ -37,6 +38,8 @@ import './is-string.test';
 import './is-undefined.test';
 import './is.test';
 import './keys.test';
+import './last.test';
 import './size.test';
+import './starts-with.test';
 import './to-code-point.test';
 import './to-lower.test';

@@ -22,10 +22,14 @@
  * SOFTWARE.
  */
 
-import {FAILURE} from 'src/core/whatwg/url/parser/states/failure';
+import {last} from 'src/core/lang/last';
 
-describe('FAILURE', () => {
-  it('should have failure instance', () => {
-    expect(FAILURE).toBeNull();
+describe('last', () => {
+  it('should return last element in array', () => {
+    expect(last(null)).toBe(undefined);
+    expect(last(undefined)).toBe(undefined);
+    expect(last([])).toBe(undefined);
+    expect(last([0])).toBe(0);
+    expect(last([0, 1])).toBe(1);
   });
 });

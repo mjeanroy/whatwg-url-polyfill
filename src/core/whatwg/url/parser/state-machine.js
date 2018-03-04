@@ -27,8 +27,8 @@ import {isFunction} from '../../../lang/is-function';
 import {getOutputEncoding} from './common/get-output-encoding';
 import {removeTabAndNewLine} from './common/remove-tab-and-new-line';
 import {trimControlChars} from './common/trim-control-chars';
+import {FAILURE} from './common/failure';
 
-import {FAILURE} from './states/failure';
 import {authorityState} from './states/authority-state';
 import {cannotBeABaseURLPathState} from './states/cannot-be-a-base-url-path-state';
 import {fileState} from './states/file-state';

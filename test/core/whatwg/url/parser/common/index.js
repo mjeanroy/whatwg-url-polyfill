@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
+import './failure.test';
 import './get-output-encoding.test';
 import './is-ascii-alpha-numeric.test';
 import './is-ascii-alpha.test';
 import './is-ascii-digit.test';
 import './is-ascii-hex-digit.test';
+import './is-ascii-octal-digit.test';
 import './is-c0-control-char.test';
 import './is-c0-control-percent-encode-set.test';
 import './is-fragment-percent-encode-set.test';

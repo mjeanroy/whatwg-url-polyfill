@@ -27,7 +27,7 @@
 import {isChar} from '../../../../lang/is-char';
 import {isNull} from '../../../../lang/is-null';
 import {clone} from '../../../../lang/clone';
-import {FAILURE} from './failure';
+import {FAILURE} from '../common/failure';
 import {FILE_STATE, FRAGMENT_STATE, RELATIVE_STATE} from './states';
 
 /**

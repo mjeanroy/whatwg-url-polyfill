@@ -22,38 +22,17 @@
  * SOFTWARE.
  */
 
-/* eslint-disable brace-style */
-
-import {isNull} from '../../../../lang/is-null';
-import {toLower} from '../../../../lang/to-lower';
-import {isAsciiAlpha} from '../common/is-ascii-alpha';
-import {FAILURE} from '../common/failure';
-import {NO_SCHEME_STATE, SCHEME_STATE} from './states';
-
 /**
- * Algorithm for the `scheme start state` step.
+ * Get last element in array, returns `undefined` if array
+ * is empty.
  *
- * @param {StateMachine} sm The state machine.
- * @param {string} c The current parsed character.
- * @return {void|FAILURE} Nothing, or `FAILURE` in case of error.
- * @see https://url.spec.whatwg.org/#scheme-start-state
+ * @param {Array<*>} array The array.
+ * @return {*} The last element in array.
  */
-export function schemeStartState(sm, c) {
-  // 1- If c is an ASCII alpha, append c, lowercased, to buffer, and set state to scheme state.
-  if (isAsciiAlpha(c)) {
-    sm.buffer += toLower(c);
-    sm.state = SCHEME_STATE;
+export function last(array) {
+  if (!array || array.length === 0) {
+    return undefined;
   }
 
-  // 2- Otherwise, if state override is not given, set state to no scheme state, and decrease pointer by one.
-  else if (isNull(sm.stateOverride)) {
-    sm.state = NO_SCHEME_STATE;
-    sm.pointer--;
-  }
-
-  // 3- Otherwise, validation error, return failure.
-  else {
-    sm.validationError = true;
-    return FAILURE;
-  }
+  return array[array.length - 1];
 }

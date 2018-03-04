@@ -23,7 +23,7 @@
  */
 
 import _forEach from 'lodash.foreach';
-import {FAILURE} from 'src/core/whatwg/url/parser/states/failure';
+import {FAILURE} from 'src/core/whatwg/url/parser/common/failure';
 import {authorityState} from 'src/core/whatwg/url/parser/states/authority-state';
 import {createStateMachine} from './create-state-machine';
 

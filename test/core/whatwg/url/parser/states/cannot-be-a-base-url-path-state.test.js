@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import {FAILURE} from 'src/core/whatwg/url/parser/states/failure';
+import {FAILURE} from 'src/core/whatwg/url/parser/common/failure';
 import {cannotBeABaseURLPathState} from 'src/core/whatwg/url/parser/states/cannot-be-a-base-url-path-state';
 import {createStateMachine} from './create-state-machine';
 

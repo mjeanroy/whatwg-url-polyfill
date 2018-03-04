@@ -31,7 +31,7 @@ import {isAsciiAlphaNumeric} from '../common/is-ascii-alpha-numeric';
 import {isSpecialUrl} from '../common/is-special-url';
 import {isSpecialScheme} from '../common/is-special-scheme';
 import {isSpecialSchemeDefaultPort} from '../common/is-special-scheme-default-port';
-import {FAILURE} from './failure';
+import {FAILURE} from '../common/failure';
 import {
   CANNOT_BE_A_BASE_URL_PATH_STATE,
   NO_SCHEME_STATE,

@@ -23,6 +23,7 @@
  */
 
 import './common/index';
+import './host/index';
 import './states/index';
 import './state-machine.test';
 import './url.test';

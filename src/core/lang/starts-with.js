@@ -22,38 +22,22 @@
  * SOFTWARE.
  */
 
-/* eslint-disable brace-style */
-
-import {isNull} from '../../../../lang/is-null';
-import {toLower} from '../../../../lang/to-lower';
-import {isAsciiAlpha} from '../common/is-ascii-alpha';
-import {FAILURE} from '../common/failure';
-import {NO_SCHEME_STATE, SCHEME_STATE} from './states';
+import {every} from './every';
+import {isChar} from './is-char';
 
 /**
- * Algorithm for the `scheme start state` step.
+ * Check if given `string` starts with given prefix.
  *
- * @param {StateMachine} sm The state machine.
- * @param {string} c The current parsed character.
- * @return {void|FAILURE} Nothing, or `FAILURE` in case of error.
- * @see https://url.spec.whatwg.org/#scheme-start-state
+ * @param {string} input The input string.
+ * @param {string} prefix The prefix string.
+ * @return {boolean} `true` if `input` starts with `prefix`, `false` otherwise.
  */
-export function schemeStartState(sm, c) {
-  // 1- If c is an ASCII alpha, append c, lowercased, to buffer, and set state to scheme state.
-  if (isAsciiAlpha(c)) {
-    sm.buffer += toLower(c);
-    sm.state = SCHEME_STATE;
+export function startsWith(input, prefix) {
+  if (!input || input.length < prefix) {
+    return false;
   }
 
-  // 2- Otherwise, if state override is not given, set state to no scheme state, and decrease pointer by one.
-  else if (isNull(sm.stateOverride)) {
-    sm.state = NO_SCHEME_STATE;
-    sm.pointer--;
-  }
-
-  // 3- Otherwise, validation error, return failure.
-  else {
-    sm.validationError = true;
-    return FAILURE;
-  }
+  return every(prefix, (x, i) => (
+    isChar(input[i], x)
+  ));
 }
