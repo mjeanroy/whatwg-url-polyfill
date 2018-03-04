@@ -22,8 +22,15 @@
  * SOFTWARE.
  */
 
+import './is-ascii-alpha-numeric.test';
+import './is-ascii-alpha.test';
+import './is-ascii-digit.test';
+import './is-ascii-hex-digit.test';
 import './is-c0-control-char.test';
+import './is-c0-control-percent-encode-set.test';
 import './is-space-char.test';
 import './is-special-scheme.test';
 import './is-special-url.test';
+import './is-url-code-point.test';
 import './percent-encode.test';
+import './starts-with-ascii-hex-digit.test';

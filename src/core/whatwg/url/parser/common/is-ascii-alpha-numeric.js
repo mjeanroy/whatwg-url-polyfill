@@ -22,6 +22,16 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {isAsciiAlpha} from './is-ascii-alpha';
+import {isAsciiDigit} from './is-ascii-digit';
+
+/**
+ * Check if a given character is an alpha numeric character.
+ *
+ * @param {string} c The character.
+ * @return {boolean} `true` if `c` is an alpha-numeric character, `false` otherwise.
+ * @see https://infra.spec.whatwg.org/#ascii-alphanumeric
+ */
+export function isAsciiAlphaNumeric(c) {
+  return isAsciiAlpha(c) || isAsciiDigit(c);
+}

@@ -22,6 +22,12 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {isC0ControlPercentEncodeSet} from 'src/core/whatwg/url/parser/common/is-c0-control-percent-encode-set';
+
+describe('isFragmentPercentEncodeSet', () => {
+  it('should return true with C0 Control characters', () => {
+     for (let i = 0x0000; i <= 0x001F; i++) {
+       expect(isC0ControlPercentEncodeSet(i)).toBe(true);
+     }
+  });
+});

@@ -22,6 +22,16 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {startsWithAsciiHexDigit} from 'src/core/whatwg/url/parser/common/starts-with-ascii-hex-digit';
+
+describe('startsWithAsciiHexDigit', () => {
+  it('should return true if it starts with hex digit', () => {
+    expect(startsWithAsciiHexDigit('A4')).toBe(true);
+  });
+
+  it('should return true if it does not starts with hex digit', () => {
+    expect(startsWithAsciiHexDigit('XA')).toBe(false);
+    expect(startsWithAsciiHexDigit('AX')).toBe(false);
+    expect(startsWithAsciiHexDigit('XX')).toBe(false);
+  });
+});

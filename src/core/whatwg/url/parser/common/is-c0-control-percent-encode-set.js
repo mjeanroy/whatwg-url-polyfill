@@ -22,6 +22,16 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {isC0ControlChar} from './is-c0-control-char';
+
+/**
+ * Check if the given character is part of the C0 Control and percent encode set.
+ *
+ * @param {number} c The code point to check.
+ * @return {boolean} `true` if code point is part of the C0 Control and percent encode set, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#c0-control-percent-encode-set
+ */
+export function isC0ControlPercentEncodeSet(c) {
+  // The C0 control percent-encode set are the C0 controls and all code points greater than U+007E (~).
+  return isC0ControlChar(c) || c > 0x007E;
+}

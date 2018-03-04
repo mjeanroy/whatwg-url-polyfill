@@ -22,6 +22,19 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {isAsciiHexDigit} from './is-ascii-hex-digit';
+
+/**
+ * Check if a string input starts with two ascii HEX digit characters.
+ *
+ * @param {string} input The input string.
+ * @return {boolean} `true` if input starts with two HEX digit characters, `false` otherwise.
+ * @see https://infra.spec.whatwg.org/#ascii-hex-digit
+ */
+export function startsWithAsciiHexDigit(input) {
+  if (!input || input.length < 2) {
+    return false;
+  }
+
+  return isAsciiHexDigit(input[0]) && isAsciiHexDigit(input[1]);
+}

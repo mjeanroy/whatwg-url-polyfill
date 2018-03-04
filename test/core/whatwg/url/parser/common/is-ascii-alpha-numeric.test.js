@@ -22,6 +22,33 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {isAsciiAlphaNumeric} from 'src/core/whatwg/url/parser/common/is-ascii-alpha-numeric';
+
+describe('isAsciiAlphaNumeric', () => {
+  it('should return true with character between 0 and 9', () => {
+    for (let i = 0; i <= 9; ++i) {
+      const c = i.toString();
+      expect(isAsciiAlphaNumeric(c)).toBe(true);
+    }
+  });
+
+  it('should return true with a lower character between a and z', () => {
+    const startCodePoint = 'a'.charCodeAt(0);
+
+    for (let i = 0; i < 26; ++i) {
+      const code = startCodePoint + i;
+      const c = String.fromCharCode(code);
+      expect(isAsciiAlphaNumeric(c)).toBe(true);
+    }
+  });
+
+  it('should return true with an upper character between A and Z', () => {
+    const startCodePoint = 'A'.charCodeAt(0);
+
+    for (let i = 0; i < 26; ++i) {
+      const code = startCodePoint + i;
+      const c = String.fromCharCode(code);
+      expect(isAsciiAlphaNumeric(c)).toBe(true);
+    }
+  });
+});

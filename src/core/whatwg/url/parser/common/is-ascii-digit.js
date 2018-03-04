@@ -22,6 +22,22 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {toCodePoint} from '../../../../lang/to-code-point';
+
+const ZERO_CODE = 0x0030;
+const NINE_CODE = 0x0039;
+
+/**
+ * Check if given code point is a digit character.
+ *
+ * @param {number} c The code point.
+ * @return {boolean} `true` if `c` is a numeric character code point, `false` otherwise.
+ */
+export function isAsciiDigit(c) {
+  if (!c) {
+    return false;
+  }
+
+  const code = toCodePoint(c);
+  return code >= ZERO_CODE && code <= NINE_CODE;
+}

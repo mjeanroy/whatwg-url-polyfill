@@ -22,6 +22,29 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
+import {isAsciiDigit} from 'src/core/whatwg/url/parser/common/is-ascii-digit';
+
+describe('isAsciiDigit', () => {
+  it('should return false nil or the empty string', () => {
+    expect(isAsciiDigit(null)).toBe(false);
+    expect(isAsciiDigit(undefined)).toBe(false);
+    expect(isAsciiDigit('')).toBe(false);
+  });
+
+  it('should return true with character between 0 and 9', () => {
+    for (let i = 0; i <= 9; ++i) {
+      const c = i.toString();
+      expect(isAsciiDigit(c)).toBe(true);
+    }
+  });
+
+  it('should return false with alpha characters', () => {
+    const startCodePoint = 'a'.charCodeAt(0);
+
+    for (let i = 0; i < 26; ++i) {
+      const code = startCodePoint + i;
+      const c = String.fromCharCode(code);
+      expect(isAsciiDigit(c)).toBe(false);
+    }
+  });
+});
