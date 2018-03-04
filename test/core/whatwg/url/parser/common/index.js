@@ -35,5 +35,6 @@ import './is-special-url.test';
 import './is-url-code-point.test';
 import './is-windows-drive-letter.test';
 import './percent-encode.test';
+import './shorten-url-path.test';
 import './starts-with-ascii-hex-digit.test';
 import './starts-with-windows-drive-letter.test';

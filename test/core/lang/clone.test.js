@@ -22,8 +22,38 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {clone} from 'src/core/lang/clone';
+
+describe('clone', () => {
+  it('should return nil', () => {
+    expect(clone(null)).toBe(null);
+    expect(clone(undefined)).toBe(undefined);
+  });
+
+  it('should return primitives', () => {
+    expect(clone(0)).toBe(0);
+    expect(clone(true)).toBe(true);
+    expect(clone(false)).toBe(false);
+    expect(clone('')).toBe('');
+  });
+
+  it('should clone copy of array', () => {
+    const array = [0, 1, 2];
+    const copy = clone(array);
+
+    expect(copy).not.toBe(array);
+    expect(copy).toEqual(array);
+  });
+
+  it('should clone copy of object', () => {
+    const o = {
+      id: 1,
+      name: 'John Doe',
+    };
+
+    const copy = clone(o);
+
+    expect(copy).not.toBe(o);
+    expect(copy).toEqual(o);
+  });
+});

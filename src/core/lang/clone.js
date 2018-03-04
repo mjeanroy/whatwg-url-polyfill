@@ -22,8 +22,32 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {isNil} from './is-nil';
+import {isPrimitive} from './is-primitive';
+import {isArray} from './is-array';
+import {forEach} from './for-each';
+import {keys} from './keys';
+
+/**
+ * Clone input value to a new output value.
+ *
+ * @param {*} input Input value.
+ * @return {*} Output value.
+ */
+export function clone(input) {
+  if (isNil(input) || isPrimitive(input)) {
+    return input;
+  }
+
+  if (isArray(input)) {
+    return input.slice();
+  }
+
+  const output = {};
+
+  forEach(keys(input), (key) => {
+    output[key] = input[key];
+  });
+
+  return output;
+}

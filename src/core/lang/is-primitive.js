@@ -22,8 +22,16 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {isBoolean} from './is-boolean';
+import {isNumber} from './is-number';
+import {isString} from './is-string';
+
+/**
+ * Check if a value is a primitive value.
+ *
+ * @param {*} value Value to check.
+ * @return {boolean} `true` if `value` is a primitive, `false` otherwise.
+ */
+export function isPrimitive(value) {
+  return isNumber(value) || isBoolean(value) || isString(value);
+}

@@ -22,8 +22,17 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {forEach} from 'src/core/lang/for-each';
+
+describe('forEach', () => {
+  it('should apply iteratee function for all elements in array', () => {
+    const array = [1, 2, 3];
+    const iteratee = jasmine.createSpy('iteratee');
+
+    forEach(array, iteratee);
+
+    expect(iteratee).toHaveBeenCalledWith(1, 0, array);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, array);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, array);
+  });
+});

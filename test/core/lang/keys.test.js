@@ -22,8 +22,19 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {keys} from 'src/core/lang/keys';
+
+describe('keys', () => {
+  it('should return own properties of object', () => {
+    const o = {
+      id: 1,
+      name: 'John Doe',
+    };
+
+    const props = keys(o);
+
+    expect(props.length).toBe(2);
+    expect(props).toContain('id');
+    expect(props).toContain('name');
+  });
+});

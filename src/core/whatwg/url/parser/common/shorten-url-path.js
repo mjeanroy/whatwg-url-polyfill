@@ -22,8 +22,31 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {size} from '../../../../lang/size';
+import {isNormalizedWindowsDriveLetter} from './is-normalized-windows-drive-letter';
+
+/**
+ * Shorten URL path.
+ *
+ * @param {Object} url Input URL.
+ * @return {void}
+ * @see https://url.spec.whatwg.org/#shorten-a-urls-path
+ */
+export function shortenUrlPath(url) {
+  // 1- Let path be url’s path.
+  const path = url.path;
+  const pathSize = size(path);
+
+  // 2- If path is empty, then return.
+  if (pathSize === 0) {
+    return;
+  }
+
+  // 3- If url’s scheme is "file", path’s size is 1, and path[0] is a normalized Windows drive letter, then return.
+  if (url.scheme === 'file' && pathSize === 1 && isNormalizedWindowsDriveLetter(path[0])) {
+    return;
+  }
+
+  // 4- Remove path’s last item.
+  path.pop();
+}

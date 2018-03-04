@@ -22,8 +22,18 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {is} from './is';
+
+const _isArray = Array.isArray || ((value) => {
+  return is(value, 'Array');
+});
+
+/**
+ * Check if a value is an array.
+ *
+ * @param {*} value Value to check.
+ * @return {boolean} `true` if `value` is an array, `false` otherwise.
+ */
+export function isArray(value) {
+  return _isArray(value);
+}

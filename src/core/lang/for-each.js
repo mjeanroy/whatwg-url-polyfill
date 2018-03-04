@@ -22,8 +22,16 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+/**
+ * Apply an iteratee function for all elements in an array.
+ *
+ * @param {Array} array The array.
+ * @param {function} iteratee The iteratee function.
+ * @param {*} ctx The iteratee context value.
+ * @return {void}
+ */
+export function forEach(array, iteratee, ctx) {
+  for (let i = 0, size = array.length; i < size; ++i) {
+    iteratee.call(ctx, array[i], i, array);
+  }
+}

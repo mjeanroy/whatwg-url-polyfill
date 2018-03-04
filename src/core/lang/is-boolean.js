@@ -22,8 +22,14 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {is} from './is';
+
+/**
+ * Check if a value is a boolean.
+ *
+ * @param {*} value Value to check.
+ * @return {boolean} `true` if `value` is a boolean, `false` otherwise.
+ */
+export function isBoolean(value) {
+  return value === true || value === false || is(value, 'Boolean');
+}

@@ -22,8 +22,21 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {isBoolean} from 'src/core/lang/is-boolean';
+
+describe('isBoolean', () => {
+  it('should return true with numbers', () => {
+    expect(isBoolean(true)).toBe(true);
+    expect(isBoolean(false)).toBe(true);
+    expect(isBoolean(Boolean(false))).toBe(true);
+
+    // eslint-disable-next-line no-new-wrappers
+    expect(isBoolean(new Boolean(false))).toBe(true);
+
+    expect(isBoolean(() => {})).toBe(false);
+    expect(isBoolean(null)).toBe(false);
+    expect(isBoolean(undefined)).toBe(false);
+    expect(isBoolean('')).toBe(false);
+    expect(isBoolean(0)).toBe(false);
+  });
+});

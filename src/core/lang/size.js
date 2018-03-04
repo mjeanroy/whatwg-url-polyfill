@@ -22,8 +22,14 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {isNil} from './is-nil';
+
+/**
+ * Get size of given array.
+ *
+ * @param {Array} input The input.
+ * @return {number} The size of given input.
+ */
+export function size(input) {
+  return isNil(input) ? 0 : input.length;
+}

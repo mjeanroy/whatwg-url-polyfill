@@ -22,8 +22,13 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {size} from 'src/core/lang/size';
+
+describe('size', () => {
+  it('should get size of input', () => {
+    expect(size(null)).toBe(0);
+    expect(size(undefined)).toBe(0);
+    expect(size([])).toBe(0);
+    expect(size([0, 1, 2])).toBe(3);
+  });
+});

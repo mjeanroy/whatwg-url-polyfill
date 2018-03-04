@@ -22,8 +22,26 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {has} from './has';
+
+const _keys = Object.keys || ((o) => {
+  const props = [];
+
+  for (const i in o) {
+    if (has(o, i)) {
+      props.push(i);
+    }
+  }
+
+  return props;
+});
+
+/**
+ * Get all own properties of given object.
+ *
+ * @param {Object} o The object.
+ * @return {Array<string>} Own properties of object.
+ */
+export function keys(o) {
+  return _keys(o);
+}

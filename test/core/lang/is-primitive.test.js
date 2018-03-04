@@ -22,8 +22,17 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
+import {isPrimitive} from 'src/core/lang/is-primitive';
+
+describe('isPrimitive', () => {
+  it('should return true with numbers, strings or booleans', () => {
+    expect(isPrimitive(true)).toBe(true);
+    expect(isPrimitive(false)).toBe(true);
+    expect(isPrimitive('')).toBe(true);
+    expect(isPrimitive(0)).toBe(true);
+
+    expect(isPrimitive(() => {})).toBe(false);
+    expect(isPrimitive(null)).toBe(false);
+    expect(isPrimitive(undefined)).toBe(false);
+  });
+});
