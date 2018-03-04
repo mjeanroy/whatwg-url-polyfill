@@ -51,6 +51,12 @@ gulp.task('tdd', (done) => {
   startKarma('tdd', done);
 });
 
+gulp.task('travis', (done) => {
+  const isSauceEnabled = process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY;
+  const target = isSauceEnabled ? 'saucelab' : 'test';
+  startKarma(target, done);
+});
+
 /**
  * Start Karma Server and run unit tests.
  *

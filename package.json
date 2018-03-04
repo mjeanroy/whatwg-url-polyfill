@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "gulp lint",
     "test": "gulp test",
-    "travis": "gulp test"
+    "travis": "gulp travis"
   },
   "keywords": [
     "whatwg-url",
@@ -34,6 +34,7 @@
     "karma-phantomjs-launcher": "1.0.4",
     "karma-rollup-preprocessor": "5.1.1",
     "karma-safari-launcher": "1.0.0",
+    "karma-sauce-launcher": "1.2.0",
     "lodash.foreach": "4.5.0",
     "lodash.merge": "4.6.1",
     "phantomjs-prebuilt": "2.1.16",
