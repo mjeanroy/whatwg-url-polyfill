@@ -22,11 +22,38 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
-import './fragment-state.test';
-import './no-scheme-state.test';
-import './path-or-authority-state.test';
+import {FAILURE} from 'src/core/whatwg/url/parser/states/failure';
+import {pathOrAuthorityState} from 'src/core/whatwg/url/parser/states/path-or-authority-state';
+import {createStateMachine} from './create-state-machine';
+
+describe('pathOrAuthorityState', () => {
+  it('should parse "/" character', () => {
+    const sm = createStateMachine({
+      input: '/test',
+      buffer: '',
+      pointer: 0,
+      state: 'path or authority state',
+    });
+
+    const result = pathOrAuthorityState(sm, '/');
+
+    expect(result).not.toBe(FAILURE);
+    expect(sm.state).toBe('authority state');
+    expect(sm.pointer).toBe(0);
+  });
+
+  it('should parse character other than "/"', () => {
+    const sm = createStateMachine({
+      input: 'test',
+      buffer: '',
+      pointer: 0,
+      state: 'path or authority state',
+    });
+
+    const result = pathOrAuthorityState(sm, 't');
+
+    expect(result).not.toBe(FAILURE);
+    expect(sm.state).toBe('path state');
+    expect(sm.pointer).toBe(-1);
+  });
+});

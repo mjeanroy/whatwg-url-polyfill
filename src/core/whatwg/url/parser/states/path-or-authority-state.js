@@ -22,11 +22,28 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
-import './fragment-state.test';
-import './no-scheme-state.test';
-import './path-or-authority-state.test';
+/* eslint-disable brace-style */
+
+import {isChar} from '../../../../lang/is-char';
+import {AUTHORITY_STATE, PATH_STATE} from './states';
+
+/**
+ * Implement `path or authority state` parsing.
+ *
+ * @param {StateMachine} sm The state machine.
+ * @param {string} c The character being parsed.
+ * @return {void}
+ * @see https://url.spec.whatwg.org/#path-or-authority-state
+ */
+export function pathOrAuthorityState(sm, c) {
+  // 1- If c is U+002F (/), then set state to authority state.
+  if (isChar(c, '/')) {
+    sm.state = AUTHORITY_STATE;
+  }
+
+  // 2- Otherwise, set state to path state, and decrease pointer by one.
+  else {
+    sm.state = PATH_STATE;
+    sm.pointer--;
+  }
+}
