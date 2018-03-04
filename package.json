@@ -5,7 +5,8 @@
   "main": "dist/url.js",
   "scripts": {
     "lint": "gulp lint",
-    "test": "gulp test"
+    "test": "gulp test",
+    "travis": "gulp test"
   },
   "keywords": [
     "whatwg-url",
