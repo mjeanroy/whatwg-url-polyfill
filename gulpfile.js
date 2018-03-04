@@ -24,12 +24,26 @@
 
 const path = require('path');
 const gulp = require('gulp');
+const eslint = require('gulp-eslint');
 const log = require('fancy-log');
 const colors = require('ansi-colors');
 const KarmaServer = require('karma').Server;
 const conf = require('./conf');
 
-gulp.task('test', (done) => {
+gulp.task('lint', () => {
+  const inputs = [
+    path.join(conf.src, '**', '*.js'),
+    path.join(conf.test, '**', '*.js'),
+    path.join(conf.root, '*.js'),
+  ];
+
+  return gulp.src(inputs)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('test', ['lint'], (done) => {
   startKarma('test', done);
 });
 
