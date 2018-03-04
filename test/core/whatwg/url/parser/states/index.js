@@ -28,3 +28,4 @@ import './failure.test';
 import './file-slash-state.test';
 import './file-state.test';
 import './fragment-state.test';
+import './no-scheme-state.test';
