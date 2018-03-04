@@ -10,7 +10,7 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permigission notice shall be included in all
+ * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -22,18 +22,31 @@
  * SOFTWARE.
  */
 
-import './authority-state.test';
-import './cannot-be-a-base-url-path-state.test';
-import './failure.test';
-import './file-slash-state.test';
-import './file-state.test';
-import './fragment-state.test';
-import './no-scheme-state.test';
-import './path-or-authority-state.test';
-import './path-start-state.test';
-import './relative-slash-state.test';
-import './scheme-start-state.test';
-import './scheme-state.test';
-import './special-authority-ignore-slashes-state.test';
-import './special-authority-slashes-state.test';
-import './special-relative-or-authority-state.test';
+/* eslint-disable brace-style */
+
+import {isChar} from '../../../../lang/is-char';
+import {RELATIVE_STATE, SPECIAL_AUTHORITY_IGNORE_SLAHES_STATE} from './states';
+
+/**
+ * Implement `special relative or authority state` parsing.
+ *
+ * @param {StateMachine} sm The state machine.
+ * @param {string} c The character being parsed.
+ * @return {void}
+ * @see https://url.spec.whatwg.org/#special-relative-or-authority-state
+ */
+export function specialRelativeOrAuthorityState(sm, c) {
+  // 1- If c is U+002F (/) and remaining starts with U+002F (/), then set state
+  // to special authority ignore slashes state and increase pointer by one.
+  if (isChar(c, '/') && isChar(sm.input[sm.pointer + 1], '/')) {
+    sm.state = SPECIAL_AUTHORITY_IGNORE_SLAHES_STATE;
+    sm.pointer++;
+  }
+
+  // 2- Otherwise, validation error, set state to relative state and decrease pointer by one.
+  else {
+    sm.validationError = true;
+    sm.state = RELATIVE_STATE;
+    sm.pointer--;
+  }
+}
