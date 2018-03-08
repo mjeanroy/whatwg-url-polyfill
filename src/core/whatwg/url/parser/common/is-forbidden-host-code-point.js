@@ -22,25 +22,36 @@
  * SOFTWARE.
  */
 
-import './clone.test';
-import './code-point-at.test';
-import './every.test';
-import './for-each.test';
-import './has.test';
-import './is-boolean.test';
-import './is-char.test';
-import './is-function.test';
-import './is-nil.test';
-import './is-null.test';
-import './is-number.test';
-import './is-primitive.test';
-import './is-string.test';
-import './is-undefined.test';
-import './is.test';
-import './keys.test';
-import './last.test';
-import './size.test';
-import './some.test';
-import './starts-with.test';
-import './to-code-point.test';
-import './to-lower.test';
+import {isChar} from '../../../../lang/is-char';
+import {isNil} from '../../../../lang/is-nil';
+import {some} from '../../../../lang/some';
+
+/**
+ * A forbidden host code point is U+0000 NULL, U+0009 TAB, U+000A LF, U+000D CR, U+0020 SPACE,
+ * U+0023 (#), U+0025 (%), U+002F (/), U+003A (:), U+003F (?),
+ * U+0040 (@), U+005B ([), U+005C (\), or U+005D (]).
+ *
+ * @type {Array<Number>}
+ * @const
+ * @see https://url.spec.whatwg.org/#forbidden-host-code-point
+ */
+const FORBIDDEN_CODE_POINTS = [
+  0x0000, 0x0009, 0x000A, 0X000D, 0x0020,
+  0x0023, 0x0025, 0x002F, 0x003A, 0x003F,
+  0x0040, 0x005B, 0x005C, 0x005D,
+];
+
+/**
+ * Check if given code point is a forbidden host code point.
+ *
+ * @param {string|number} c The character (or code point).
+ * @return {boolean} `true` if `c` is a forbidden host code point, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#forbidden-host-code-point
+ */
+export function isForbiddenHostCodePoint(c) {
+  if (isNil(c)) {
+    return false;
+  }
+
+  return some(FORBIDDEN_CODE_POINTS, (x) => isChar(c, x));
+}

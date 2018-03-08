@@ -24,3 +24,4 @@
 
 import './ipv4-parser.test';
 import './ipv6-parser.test';
+import './opaque-host-parser.test';

@@ -31,6 +31,7 @@ import './is-ascii-hex-digit.test';
 import './is-ascii-octal-digit.test';
 import './is-c0-control-char.test';
 import './is-c0-control-percent-encode-set.test';
+import './is-forbidden-host-code-point.test';
 import './is-fragment-percent-encode-set.test';
 import './is-normalized-windows-drive-letter.test';
 import './is-space-char.test';

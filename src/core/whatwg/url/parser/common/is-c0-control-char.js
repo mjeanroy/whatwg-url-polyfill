@@ -26,7 +26,7 @@
  * Check if given code point is a control char or a space.
  *
  * @param {number} code Character code point (result of `charCodeAt`).
- * @return {boolean} `true` if `code` is a control char or a space, `false` otherwise.
+ * @return {boolean} `true` if `code` is a control char, `false` otherwise.
  * @see https://infra.spec.whatwg.org/#c0-control
  */
 export function isC0ControlChar(code) {

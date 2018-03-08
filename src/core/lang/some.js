@@ -22,25 +22,21 @@
  * SOFTWARE.
  */
 
-import './clone.test';
-import './code-point-at.test';
-import './every.test';
-import './for-each.test';
-import './has.test';
-import './is-boolean.test';
-import './is-char.test';
-import './is-function.test';
-import './is-nil.test';
-import './is-null.test';
-import './is-number.test';
-import './is-primitive.test';
-import './is-string.test';
-import './is-undefined.test';
-import './is.test';
-import './keys.test';
-import './last.test';
-import './size.test';
-import './some.test';
-import './starts-with.test';
-import './to-code-point.test';
-import './to-lower.test';
+/**
+ * Apply an iteratee function for all elements in an array and returns `true` if
+ * at least one element in the array pass predicate function.
+ *
+ * @param {Array} array The array.
+ * @param {function} predicate The predicate function.
+ * @param {*} ctx The iteratee context value.
+ * @return {boolean} `true` if at leat one element in `array` pass the predicate function, `false` otherwise.
+ */
+export function some(array, predicate, ctx) {
+  for (let i = 0, size = array.length; i < size; ++i) {
+    if (predicate(array[i], i, array)) {
+      return true;
+    }
+  }
+
+  return false;
+}

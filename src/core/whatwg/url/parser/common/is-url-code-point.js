@@ -23,6 +23,7 @@
  */
 
 import {isChar} from '../../../../lang/is-char';
+import {some} from '../../../../lang/some';
 import {toCodePoint} from '../../../../lang/to-code-point';
 import {isAsciiAlphaNumeric} from './is-ascii-alpha-numeric';
 
@@ -65,13 +66,7 @@ const SIMPLE_URL_CHARACTERS = [
  * @return {boolean} `true` if the character is an URL character, `false` otherwise.
  */
 function isSimpleUrlCharacter(c) {
-  for (let i = 0, size = SIMPLE_URL_CHARACTERS.length; i < size; ++i) {
-    if (isChar(c, SIMPLE_URL_CHARACTERS[i])) {
-      return true;
-    }
-  }
-
-  return false;
+  return some(SIMPLE_URL_CHARACTERS, (x) => isChar(c, x));
 }
 
 /**
@@ -135,13 +130,7 @@ function isNonCharacter(codePoint) {
   // or U+FFFE, U+FFFF, U+1FFFE, U+1FFFF, U+2FFFE, U+2FFFF, U+3FFFE, U+3FFFF, U+4FFFE, U+4FFFF,
   // U+5FFFE, U+5FFFF, U+6FFFE, U+6FFFF, U+7FFFE, U+7FFFF, U+8FFFE, U+8FFFF, U+9FFFE, U+9FFFF, U+AFFFE,
   // U+AFFFF, U+BFFFE, U+BFFFF, U+CFFFE, U+CFFFF, U+DFFFE, U+DFFFF, U+EFFFE, U+EFFFF, U+FFFFE, U+FFFFF, U+10FFFE, or U+10FFFF.
-  for (let i = 0, size = NON_CHARACTERS_CODE_POINT.length; i < size; ++i) {
-    if (isChar(codePoint, NON_CHARACTERS_CODE_POINT[i])) {
-      return false;
-    }
-  }
-
-  return false;
+  return some(NON_CHARACTERS_CODE_POINT, (x) => isChar(c, x));
 }
 
 /**

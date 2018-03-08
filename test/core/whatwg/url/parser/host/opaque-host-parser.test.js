@@ -22,25 +22,21 @@
  * SOFTWARE.
  */
 
-import './clone.test';
-import './code-point-at.test';
-import './every.test';
-import './for-each.test';
-import './has.test';
-import './is-boolean.test';
-import './is-char.test';
-import './is-function.test';
-import './is-nil.test';
-import './is-null.test';
-import './is-number.test';
-import './is-primitive.test';
-import './is-string.test';
-import './is-undefined.test';
-import './is.test';
-import './keys.test';
-import './last.test';
-import './size.test';
-import './some.test';
-import './starts-with.test';
-import './to-code-point.test';
-import './to-lower.test';
+import {FAILURE} from 'src/core/whatwg/url/parser/common/failure';
+import {opaqueHostParser} from 'src/core/whatwg/url/parser/host/opaque-host-parser';
+
+describe('ipv6Parser', () => {
+  it('should parse valid host', () => {
+    const input = 'localhost';
+    const result = opaqueHostParser(input);
+
+    expect(result).not.toBe(FAILURE);
+    expect(result).toBe(input);
+  });
+
+  it('should return failure with forbidden host code point', () => {
+    const input = 'local host?(foo)#[bar]';
+    const result = opaqueHostParser(input);
+    expect(result).toBe(FAILURE);
+  });
+});

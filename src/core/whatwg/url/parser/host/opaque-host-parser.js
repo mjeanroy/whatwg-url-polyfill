@@ -22,36 +22,35 @@
  * SOFTWARE.
  */
 
-import {isChar} from '../../../../lang/is-char';
-import {isNil} from '../../../../lang/is-nil';
 import {some} from '../../../../lang/some';
-import {isSpaceChar} from './is-space-char';
-import {isC0ControlPercentEncodeSet} from './is-c0-control-percent-encode-set';
+import {isC0ControlPercentEncodeSet} from '../common/is-c0-control-percent-encode-set';
+import {isForbiddenHostCodePoint} from '../common/is-forbidden-host-code-point';
+import {percentEncode} from '../common/percent-encode';
+import {FAILURE} from '../common/failure';
 
 /**
- * The set of characters to be encoded in fragment part.
+ * Process input using the `opaque host parser` algorithm.
  *
- * @type {Array<String>}
- * @const
- * @see https://url.spec.whatwg.org/#fragment-percent-encode-set
+ * @param {string} input The input string.
+ * @return {string} The output string.
+ * @see https://url.spec.whatwg.org/#concept-opaque-host-parser
  */
-const FRAGMENT_SET = [
-  '"', '<', '>', '`',
-];
-
-/**
- * Check if the given character is part of the fragment percent encode set.
- *
- * @param {number} c The code point to check.
- * @return {boolean} `true` if code point is part of the fragment percent encode set, `false` otherwise.
- * @see https://url.spec.whatwg.org/#fragment-percent-encode-set
- */
-export function isFragmentPercentEncodeSet(c) {
-  if (isNil(c)) {
-    return false;
+export function opaqueHostParser(input) {
+  // 1- If input contains a forbidden host code point excluding U+0025 (%), validation error, return failure.
+  if (some(input, (x) => isForbiddenHostCodePoint(x))) {
+    return FAILURE;
   }
 
-  // The fragment percent-encode set is the C0 control percent-encode set
-  // and U+0020 SPACE, U+0022 ("), U+003C (<), U+003E (>), and U+0060 (`).
-  return isC0ControlPercentEncodeSet(c) || isSpaceChar(c) || some(FRAGMENT_SET, (x) => isChar(c, x));
+  // 2- Let output be the empty string.
+  let output = '';
+
+  // 3- For each code point in input, UTF-8 percent encode it using the C0 control percent-encode set,
+  // and append the result to output.
+  for (let i = 0, size = input.length; i < size; ++i) {
+    const codePoint = input[i];
+    const percentEncoded = percentEncode(codePoint, isC0ControlPercentEncodeSet);
+    output += percentEncoded;
+  }
+  // 4- Return output.
+  return output;
 }

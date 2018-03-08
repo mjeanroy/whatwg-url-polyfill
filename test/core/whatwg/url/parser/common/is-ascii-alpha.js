@@ -22,36 +22,45 @@
  * SOFTWARE.
  */
 
-import {isChar} from '../../../../lang/is-char';
-import {isNil} from '../../../../lang/is-nil';
-import {some} from '../../../../lang/some';
-import {isSpaceChar} from './is-space-char';
-import {isC0ControlPercentEncodeSet} from './is-c0-control-percent-encode-set';
+import {codePointAt} from '../../../lang/code-point-at';
+
+const LOWER_A_CODE = 0x0061;
+const LOWER_Z_CODE = 0x007A;
+const UPPER_A_CODE = 0x0041;
+const UPPER_Z_CODE = 0x005A;
 
 /**
- * The set of characters to be encoded in fragment part.
+ * Check if a given character is an alpha numeric character.
  *
- * @type {Array<String>}
- * @const
- * @see https://url.spec.whatwg.org/#fragment-percent-encode-set
+ * @param {string} c The character.
+ * @return {boolean} `true` if `c` is an alpha-numeric character, `false` otherwise.
+ * @see https://infra.spec.whatwg.org/#ascii-alpha
  */
-const FRAGMENT_SET = [
-  '"', '<', '>', '`',
-];
-
-/**
- * Check if the given character is part of the fragment percent encode set.
- *
- * @param {number} c The code point to check.
- * @return {boolean} `true` if code point is part of the fragment percent encode set, `false` otherwise.
- * @see https://url.spec.whatwg.org/#fragment-percent-encode-set
- */
-export function isFragmentPercentEncodeSet(c) {
-  if (isNil(c)) {
+export function isAsciiAlpha(c) {
+  if (!c) {
     return false;
   }
 
-  // The fragment percent-encode set is the C0 control percent-encode set
-  // and U+0020 SPACE, U+0022 ("), U+003C (<), U+003E (>), and U+0060 (`).
-  return isC0ControlPercentEncodeSet(c) || isSpaceChar(c) || some(FRAGMENT_SET, (x) => isChar(c, x));
+  const code = codePointAt(c, 0);
+  return isLowerAlpha(code) || isUpperAlpha(code);
+}
+
+/**
+ * Check if given code point is a lower alpha character.
+ *
+ * @param {number} codePoint The code point.
+ * @return {boolean} `true` if `c` is a lower alpha character code point, `false` otherwise.
+ */
+function isLowerAlpha(codePoint) {
+  return codePoint >= LOWER_A_CODE && codePoint <= LOWER_Z_CODE;
+}
+
+/**
+ * Check if given code point is an upper alpha character.
+ *
+ * @param {number} codePoint The code point.
+ * @return {boolean} `true` if `c` is an upper alpha character code point, `false` otherwise.
+ */
+function isUpperAlpha(codePoint) {
+  return codePoint >= UPPER_A_CODE && codePoint <= UPPER_Z_CODE;
 }

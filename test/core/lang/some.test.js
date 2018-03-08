@@ -22,34 +22,43 @@
  * SOFTWARE.
  */
 
-import {every} from 'src/core/lang/every';
+import {some} from 'src/core/lang/some';
 
-describe('every', () => {
-  it('should returns true if all elements in array verify predicate', () => {
-    const array = [2, 4, 6];
+describe('some', () => {
+  it('should returns true if one element in array verify predicate', () => {
+    const array = [1, 2, 3];
     const iteratee = jasmine.createSpy('iteratee').and.callFake((x) => (
       x % 2 === 0
     ));
 
-    const r = every(array, iteratee);
+    const r = some(array, iteratee);
 
     expect(r).toBe(true);
-    expect(iteratee).toHaveBeenCalledWith(2, 0, array);
-    expect(iteratee).toHaveBeenCalledWith(4, 1, array);
-    expect(iteratee).toHaveBeenCalledWith(6, 2, array);
+    expect(iteratee).toHaveBeenCalledWith(1, 0, array);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, array);
+    expect(iteratee).not.toHaveBeenCalledWith(3, 2, array);
   });
 
-  it('should returns false if one element in array does not verify predicate', () => {
-    const array = [2, 3, 4];
+  it('should returns false if no element in array verify predicate', () => {
+    const array = [1, 3, 5];
     const iteratee = jasmine.createSpy('iteratee').and.callFake((x) => (
       x % 2 === 0
     ));
 
-    const r = every(array, iteratee);
+    const r = some(array, iteratee);
 
     expect(r).toBe(false);
-    expect(iteratee).toHaveBeenCalledWith(2, 0, array);
+    expect(iteratee).toHaveBeenCalledWith(1, 0, array);
     expect(iteratee).toHaveBeenCalledWith(3, 1, array);
-    expect(iteratee).not.toHaveBeenCalledWith(4, 2, array);
+    expect(iteratee).toHaveBeenCalledWith(5, 2, array);
+  });
+
+  it('should returns false with empty array', () => {
+    const array = [];
+    const iteratee = jasmine.createSpy('iteratee').and.returnValue(true);
+    const r = some(array, iteratee);
+
+    expect(r).toBe(false);
+    expect(iteratee).not.toHaveBeenCalled();
   });
 });
