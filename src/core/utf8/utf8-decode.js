@@ -22,9 +22,15 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+/**
+ * Run UTF-8 decoder.
+ *
+ * @param {string} stream The input stream.
+ * @return {string} The decoded output stream.
+ * @see https://encoding.spec.whatwg.org/#utf-8
+ * @see https://encoding.spec.whatwg.org/#decoder
+ */
+export function utf8Decode(stream) {
+  // TODO
+  return stream;
+}

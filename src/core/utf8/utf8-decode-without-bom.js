@@ -22,9 +22,18 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {utf8Decode} from './utf8-decode';
+
+/**
+ * Run UTF-8 decoder without BOM.
+ *
+ * @param {string} stream The input stream to decode.
+ * @return {string} The decoded output stream.
+ * @see https://encoding.spec.whatwg.org/#utf-8-decode-without-bom
+ */
+export function utf8DecodeWithoutBom(stream) {
+  // 1- Let output be a code point stream.
+  // 2- Run UTF-8’s decoder with stream and output.
+  // 3- Return output.
+  return utf8Decode(stream);
+}

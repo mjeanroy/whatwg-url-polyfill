@@ -22,9 +22,15 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {fromCodePoint} from 'src/core/lang/from-code-point';
+
+describe('fromCodePoint', () => {
+  it('should return character from code point', () => {
+    expect(fromCodePoint(97)).toBe('a');
+    expect(fromCodePoint(122)).toBe('z');
+    expect(fromCodePoint(101)).toBe('e');
+    expect(fromCodePoint(114)).toBe('r');
+    expect(fromCodePoint(116)).toBe('t');
+    expect(fromCodePoint(121)).toBe('y');
+  });
+});

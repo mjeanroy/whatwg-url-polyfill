@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {domainToAscii} from 'src/core/whatwg/url/parser/host/domain-to-ascii';
+
+describe('domainToAscii', () => {
+  it('should return ascii domain', () => {
+    expect(domainToAscii('localhost', true)).toBe('localhost');
+    expect(domainToAscii('localhost', false)).toBe('localhost');
+  });
+});

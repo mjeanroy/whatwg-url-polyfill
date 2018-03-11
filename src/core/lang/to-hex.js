@@ -22,9 +22,14 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+/**
+ * Translate a given number to the corresponding string hexadecimal
+ * value.
+ *
+ * @param {number} c The number.
+ * @return {string} The hexadecimal value.
+ */
+export function toHex(c) {
+  const hex = c.toString(16).toUpperCase();
+  return hex.length === 1 ? `0${hex}` : hex;
+}

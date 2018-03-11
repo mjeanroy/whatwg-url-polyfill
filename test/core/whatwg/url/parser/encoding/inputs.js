@@ -22,9 +22,30 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+/**
+ * Map of percent-encoded chars.
+ *
+ * @type {Object}
+ * @const
+ * @see https://en.wikipedia.org/wiki/Percent-encoding
+ */
+export const INPUTS = {
+  '!': '%21',
+  '#': '%23',
+  '$': '%24',
+  '&': '%26',
+  '\'': '%27',
+  '(': '%28',
+  ')': '%29',
+  '*': '%2A',
+  '+': '%2B',
+  ',': '%2C',
+  '/': '%2F',
+  ':': '%3A',
+  ';': '%3B',
+  '=': '%3D',
+  '?': '%3F',
+  '@': '%40',
+  '[': '%5B',
+  ']': '%5D',
+};

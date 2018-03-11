@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import './contains-forbidden-host-code-point.test';
 import './failure.test';
 import './get-output-encoding.test';
 import './is-ascii-alpha-numeric.test';
@@ -40,7 +41,6 @@ import './is-special-scheme.test';
 import './is-special-url.test';
 import './is-url-code-point.test';
 import './is-windows-drive-letter.test';
-import './percent-encode.test';
 import './remove-tab-and-new-line.test';
 import './shorten-url-path.test';
 import './starts-with-ascii-hex-digit.test';

@@ -22,35 +22,40 @@
  * SOFTWARE.
  */
 
-import {containsForbiddenHostCodePoint} from '../common/contains-forbidden-host-code-point';
-import {isC0ControlPercentEncodeSet} from '../common/is-c0-control-percent-encode-set';
-import {percentEncode} from '../encoding/percent-encode';
+import {isNil} from '../../../../lang/is-nil';
+import {unicodeToAscii} from '../../../../tr46/unicode-to-ascii';
 import {FAILURE} from '../common/failure';
 
 /**
- * Process input using the `opaque host parser` algorithm.
+ * Parse host input.
  *
- * @param {string} input The input string.
- * @return {string} The output string.
- * @see https://url.spec.whatwg.org/#concept-opaque-host-parser
+ * @param {string} domain The domain input.
+ * @param {boolean} beStrict The optional `strict` flag, default is false.
+ * @return {string} The ascii output.
+ * @see https://url.spec.whatwg.org/#concept-domain-to-ascii
  */
-export function opaqueHostParser(input) {
-  // 1- If input contains a forbidden host code point excluding U+0025 (%), validation error, return failure.
-  if (containsForbiddenHostCodePoint(input)) {
+export function domainToAscii(domain, beStrict = false) {
+  // 1- If beStrict is not given, set it to false.
+  // Nothing to do here.
+
+  // 2- Let result be the result of running Unicode ToASCII with domain_name set to domain,
+  // UseSTD3ASCIIRules set to beStrict, CheckHyphens set to false, CheckBidi set to true,
+  // CheckJoiners set to true, processing_option set to Nontransitional_Processing, and VerifyDnsLength set to beStrict.
+  const result = unicodeToAscii(domain, {
+    useSTD3ASCIIRules: beStrict,
+    verifyDNSLength: beStrict,
+
+    checkBidi: true,
+    checkHyphens: false,
+    checkJoiners: true,
+    processingOption: 'nontransitional',
+  });
+
+  // 3- If result is a failure value, validation error, return failure.
+  if (isNil(result)) {
     return FAILURE;
   }
 
-  // 2- Let output be the empty string.
-  let output = '';
-
-  // 3- For each code point in input, UTF-8 percent encode it using the C0 control percent-encode set,
-  // and append the result to output.
-  for (let i = 0, size = input.length; i < size; ++i) {
-    const codePoint = input[i];
-    const percentEncoded = percentEncode(codePoint, isC0ControlPercentEncodeSet);
-    output += percentEncoded;
-  }
-
-  // 4- Return output.
-  return output;
+  // 4- Return result.
+  return result;
 }

@@ -22,9 +22,16 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+/**
+ * Translate unicode string to asccii string.
+ *
+ * @param {string} input The input unicode string.
+ * @param {object} options Parsing options.
+ * @return {string} The output ascii string.
+ * @see https://www.unicode.org/reports/tr46/#ToASCII
+ * @see https://www.unicode.org/reports/tr46/#RFC3490
+ */
+export function unicodeToAscii(input, options) {
+  // TODO
+  return input;
+}

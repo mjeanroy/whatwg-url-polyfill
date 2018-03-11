@@ -22,9 +22,29 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import _forEach from 'lodash.foreach';
+import {percentDecode} from 'src/core/whatwg/url/parser/encoding/percent-decode';
+import {INPUTS} from './inputs';
+
+describe('percentDecode', () => {
+  it('should percent-decode character', () => {
+    _forEach(INPUTS, (encoded, character) => {
+      expect(percentDecode(encoded)).toBe(character);
+    });
+  });
+
+  it('should percent-decode simple character', () => {
+    expect(percentDecode('a')).toBe('a');
+    expect(percentDecode('z')).toBe('z');
+    expect(percentDecode('e')).toBe('e');
+    expect(percentDecode('r')).toBe('r');
+    expect(percentDecode('t')).toBe('t');
+    expect(percentDecode('y')).toBe('y');
+  });
+
+  it('should percent-decode non hex charachters', () => {
+    expect(percentDecode('%XX')).toBe('%XX');
+    expect(percentDecode('%AX')).toBe('%AX');
+    expect(percentDecode('%XA')).toBe('%XA');
+  });
+});

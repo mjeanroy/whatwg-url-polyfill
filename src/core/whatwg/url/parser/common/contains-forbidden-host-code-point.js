@@ -22,9 +22,17 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {isNil} from '../../../../lang/is-nil';
+import {some} from '../../../../lang/some';
+import {isForbiddenHostCodePoint} from './is-forbidden-host-code-point';
+
+/**
+ * Check if given input string contains a forbidden host code point.
+ *
+ * @param {string} input The input string.
+ * @return {boolean} `true` if `input` contains a forbidden host code point, `false` otherwise.
+ * @see https://url.spec.whatwg.org/#forbidden-host-code-point
+ */
+export function containsForbiddenHostCodePoint(input) {
+  return !isNil(input) && some(input, (c) => isForbiddenHostCodePoint(c));
+}

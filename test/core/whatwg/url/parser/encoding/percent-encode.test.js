@@ -23,46 +23,22 @@
  */
 
 import _forEach from 'lodash.foreach';
-import {percentEncode} from 'src/core/whatwg/url/parser/common/percent-encode';
+import {percentEncode} from 'src/core/whatwg/url/parser/encoding/percent-encode';
+import {INPUTS} from './inputs';
 
 describe('percentEncode', () => {
-  // Map of percent-encoded chars
-  // see: https://en.wikipedia.org/wiki/Percent-encoding
-  const INPUTS = {
-    '!': '%21',
-    '#': '%23',
-    '$': '%24',
-    '&': '%26',
-    '\'': '%27',
-    '(': '%28',
-    ')': '%29',
-    '*': '%2A',
-    '+': '%2B',
-    ',': '%2C',
-    '/': '%2F',
-    ':': '%3A',
-    ';': '%3B',
-    '=': '%3D',
-    '?': '%3F',
-    '@': '%40',
-    '[': '%5B',
-    ']': '%5D',
-  };
-
   it('should percent-encode character if encode-set predicate returns true', () => {
-    _forEach(INPUTS, (expectedPercentEncoded, character) => {
+    _forEach(INPUTS, (encoded, character) => {
       const encodeSet = jasmine.createSpy('encodeSet').and.returnValue(true);
-      const percentEncoded = percentEncode(character, encodeSet);
-      expect(percentEncoded).toBe(expectedPercentEncoded);
+      expect(percentEncode(character, encodeSet)).toBe(encoded);
       expect(encodeSet).toHaveBeenCalled();
     });
   });
 
   it('should not percent-encode character if encode-set predicate returns false', () => {
-    _forEach(INPUTS, (expectedPercentEncoded, character) => {
+    _forEach(INPUTS, (encoded, character) => {
       const encodeSet = jasmine.createSpy('encodeSet').and.returnValue(false);
-      const percentEncoded = percentEncode(character, encodeSet);
-      expect(percentEncoded).toBe(character);
+      expect(percentEncode(character, encodeSet)).toBe(character);
       expect(encodeSet).toHaveBeenCalled();
     });
   });

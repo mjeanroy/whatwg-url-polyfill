@@ -28,7 +28,7 @@ import {isChar} from '../../../../lang/is-char';
 import {isNil} from '../../../../lang/is-nil';
 import {isFragmentPercentEncodeSet} from '../common/is-fragment-percent-encode-set';
 import {isSpecialUrl} from '../common/is-special-url';
-import {percentEncode} from '../common/percent-encode';
+import {percentEncode} from '../encoding/percent-encode';
 import {FAILURE} from '../common/failure';
 import {HOST_STATE} from './states';
 

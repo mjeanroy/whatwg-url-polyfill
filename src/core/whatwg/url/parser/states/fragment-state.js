@@ -28,7 +28,7 @@ import {isChar} from '../../../../lang/is-char';
 import {isNil} from '../../../../lang/is-nil';
 import {isFragmentPercentEncodeSet} from '../common/is-fragment-percent-encode-set';
 import {isUrlCodePoint} from '../common/is-url-code-point';
-import {percentEncode} from '../common/percent-encode';
+import {percentEncode} from '../encoding/percent-encode';
 import {startsWithAsciiHexDigit} from '../common/starts-with-ascii-hex-digit';
 
 /**

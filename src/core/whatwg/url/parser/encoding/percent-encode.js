@@ -23,6 +23,7 @@
  */
 
 import {toCodePoint} from '../../../../lang/to-code-point';
+import {toHex} from '../../../../lang/to-hex';
 
 /**
  * Apply percent encoding on given code point if this code is part of the given encode-set,
@@ -34,38 +35,5 @@ import {toCodePoint} from '../../../../lang/to-code-point';
  */
 export function percentEncode(c, encodeSet) {
   const codePoint = toCodePoint(c);
-  return encodeSet(codePoint) ? utf8PercentEncode(c) : c;
-}
-
-/**
- * Appl UTF-8 percent encoding on given character.
- *
- * @param {string} c The given character.
- * @return {string} The UTF-8 percent encoding result.
- */
-function utf8PercentEncode(c) {
-  let str = '';
-
-  for (let i = 0; i < c.length; ++i) {
-    const codePoint = toCodePoint(c, i);
-    str += toHexPercentEncode(codePoint);
-  }
-
-  return str;
-}
-
-/**
- * Translate a given code point to the corresponding UTF-8
- * percent encoding value.
- *
- * @param {number} c The code point.
- * @return {string} The percent-encoding value.
- */
-function toHexPercentEncode(c) {
-  let hex = c.toString(16).toUpperCase();
-  if (hex.length === 1) {
-    hex = `0${hex}`;
-  }
-
-  return `%${hex}`;
+  return encodeSet(codePoint) ? `%${toHex(codePoint)}` : c;
 }

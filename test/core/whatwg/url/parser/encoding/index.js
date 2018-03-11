@@ -22,9 +22,5 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import './percent-decode.test';
+import './percent-encode.test';

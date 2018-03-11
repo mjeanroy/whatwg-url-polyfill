@@ -22,9 +22,27 @@
  * SOFTWARE.
  */
 
-import './common/index';
-import './encoding/index';
-import './host/index';
-import './states/index';
-import './state-machine.test';
-import './url.test';
+import {toHex} from 'src/core/lang/to-hex';
+
+describe('toHex', () => {
+  it('should return hexadecimal value', () => {
+    expect(toHex(0)).toBe('00');
+    expect(toHex(1)).toBe('01');
+    expect(toHex(2)).toBe('02');
+    expect(toHex(3)).toBe('03');
+    expect(toHex(4)).toBe('04');
+    expect(toHex(5)).toBe('05');
+    expect(toHex(6)).toBe('06');
+    expect(toHex(7)).toBe('07');
+    expect(toHex(8)).toBe('08');
+    expect(toHex(9)).toBe('09');
+    expect(toHex(10)).toBe('0A');
+    expect(toHex(11)).toBe('0B');
+    expect(toHex(12)).toBe('0C');
+    expect(toHex(13)).toBe('0D');
+    expect(toHex(14)).toBe('0E');
+    expect(toHex(15)).toBe('0F');
+    expect(toHex(16)).toBe('10');
+    expect(toHex(17)).toBe('11');
+  });
+});
