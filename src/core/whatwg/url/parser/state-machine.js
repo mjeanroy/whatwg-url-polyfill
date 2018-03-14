@@ -34,6 +34,7 @@ import {cannotBeABaseURLPathState} from './states/cannot-be-a-base-url-path-stat
 import {fileState} from './states/file-state';
 import {fileSlashState} from './states/file-slash-state';
 import {fragmentState} from './states/fragment-state';
+import {hostState} from './states/host-state';
 import {noSchemeState} from './states/no-scheme-state';
 import {pathOrAuthorityState} from './states/path-or-authority-state';
 import {pathStartState} from './states/path-start-state';
@@ -53,6 +54,8 @@ import {
   FILE_STATE,
   FILE_SLASH_STATE,
   FRAGMENT_STATE,
+  HOST_STATE,
+  HOSTNAME_STATE,
   NO_SCHEME_STATE,
   PATH_OR_AUTHORITY_STATE,
   PATH_START_STATE,
@@ -71,6 +74,8 @@ const STATES = {
   [FILE_STATE]: fileState,
   [FILE_SLASH_STATE]: fileSlashState,
   [FRAGMENT_STATE]: fragmentState,
+  [HOST_STATE]: hostState,
+  [HOSTNAME_STATE]: hostState,
   [NO_SCHEME_STATE]: noSchemeState,
   [PATH_OR_AUTHORITY_STATE]: pathOrAuthorityState,
   [PATH_START_STATE]: pathStartState,
@@ -168,10 +173,11 @@ export class StateMachine {
     // If after a run pointer points to the EOF code point, go to the next step.
     // Otherwise, increase pointer by one and continue with the state machine.
     for (; this.pointer <= this.input.length; ++this.pointer) {
-      const c = this.input.charAt(this.pointer);
+      const eof = this.pointer >= this.input.length;
+      const c = eof ? undefined : this.input.charAt(this.pointer);
       const stateFn = STATES[this.state];
       if (!isFunction(stateFn)) {
-        return FAILURE;
+        return;
       }
 
       const stateResult = stateFn(this, c);

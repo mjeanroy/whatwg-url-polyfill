@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import {FAILURE} from 'src/core/whatwg/url/parser/common/failure';
 import {StateMachine} from 'src/core/whatwg/url/parser/state-machine';
 
 describe('StateMachine', () => {
@@ -81,26 +82,57 @@ describe('StateMachine', () => {
   describe('once initialized', () => {
     it('should parse http scheme', () => {
       const sm = new StateMachine('http://localhost:8080');
-      sm.run();
+      const result = sm.run();
+
+      expect(result).not.toBe(FAILURE);
       expect(sm.url.scheme).toBe('http');
+      expect(sm.url.username).toBe('');
+      expect(sm.url.password).toBe('');
+      expect(sm.url.host).toBe('localhost');
+    });
+
+    it('should parse http scheme with credentials', () => {
+      const sm = new StateMachine('http://foo:bar@localhost:8080');
+      const result = sm.run();
+
+      expect(result).not.toBe(FAILURE);
+      expect(sm.url.scheme).toBe('http');
+      expect(sm.url.username).toBe('foo');
+      expect(sm.url.password).toBe('bar');
+      expect(sm.url.host).toBe('localhost');
     });
 
     it('should parse https scheme', () => {
       const sm = new StateMachine('https://localhost:8080');
-      sm.run();
+      const result = sm.run();
+
+      expect(result).not.toBe(FAILURE);
       expect(sm.url.scheme).toBe('https');
+      expect(sm.url.username).toBe('');
+      expect(sm.url.password).toBe('');
+      expect(sm.url.host).toBe('localhost');
     });
 
     it('should parse ws scheme', () => {
       const sm = new StateMachine('ws://localhost:8080');
-      sm.run();
+      const result = sm.run();
+
+      expect(result).not.toBe(FAILURE);
       expect(sm.url.scheme).toBe('ws');
+      expect(sm.url.username).toBe('');
+      expect(sm.url.password).toBe('');
+      expect(sm.url.host).toBe('localhost');
     });
 
     it('should parse wss scheme', () => {
       const sm = new StateMachine('wss://localhost:8080');
-      sm.run();
+      const result = sm.run();
+
+      expect(result).not.toBe(FAILURE);
       expect(sm.url.scheme).toBe('wss');
+      expect(sm.url.username).toBe('');
+      expect(sm.url.password).toBe('');
+      expect(sm.url.host).toBe('localhost');
     });
   });
 });
