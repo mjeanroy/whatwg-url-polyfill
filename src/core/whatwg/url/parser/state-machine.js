@@ -38,6 +38,7 @@ import {hostState} from './states/host-state';
 import {noSchemeState} from './states/no-scheme-state';
 import {pathOrAuthorityState} from './states/path-or-authority-state';
 import {pathStartState} from './states/path-start-state';
+import {portState} from './states/port-state';
 import {relativeState} from './states/relative-state';
 import {relativeSlashState} from './states/relative-slash-state';
 import {schemeStartState} from './states/scheme-start-state';
@@ -59,6 +60,7 @@ import {
   NO_SCHEME_STATE,
   PATH_OR_AUTHORITY_STATE,
   PATH_START_STATE,
+  PORT_STATE,
   RELATIVE_STATE,
   RELATIVE_SLASH_STATE,
   SCHEME_START_STATE,
@@ -79,6 +81,7 @@ const STATES = {
   [NO_SCHEME_STATE]: noSchemeState,
   [PATH_OR_AUTHORITY_STATE]: pathOrAuthorityState,
   [PATH_START_STATE]: pathStartState,
+  [PORT_STATE]: portState,
   [RELATIVE_STATE]: relativeState,
   [RELATIVE_SLASH_STATE]: relativeSlashState,
   [SCHEME_START_STATE]: schemeStartState,

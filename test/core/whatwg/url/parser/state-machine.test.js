@@ -89,6 +89,19 @@ describe('StateMachine', () => {
       expect(sm.url.username).toBe('');
       expect(sm.url.password).toBe('');
       expect(sm.url.host).toBe('localhost');
+      expect(sm.url.port).toBe(8080);
+    });
+
+    it('should parse http scheme with default port', () => {
+      const sm = new StateMachine('http://localhost:80');
+      const result = sm.run();
+
+      expect(result).not.toBe(FAILURE);
+      expect(sm.url.scheme).toBe('http');
+      expect(sm.url.username).toBe('');
+      expect(sm.url.password).toBe('');
+      expect(sm.url.host).toBe('localhost');
+      expect(sm.url.port).toBeNull();
     });
 
     it('should parse http scheme with credentials', () => {
@@ -100,6 +113,7 @@ describe('StateMachine', () => {
       expect(sm.url.username).toBe('foo');
       expect(sm.url.password).toBe('bar');
       expect(sm.url.host).toBe('localhost');
+      expect(sm.url.port).toBe(8080);
     });
 
     it('should parse https scheme', () => {
@@ -111,6 +125,7 @@ describe('StateMachine', () => {
       expect(sm.url.username).toBe('');
       expect(sm.url.password).toBe('');
       expect(sm.url.host).toBe('localhost');
+      expect(sm.url.port).toBe(8080);
     });
 
     it('should parse ws scheme', () => {
@@ -122,6 +137,7 @@ describe('StateMachine', () => {
       expect(sm.url.username).toBe('');
       expect(sm.url.password).toBe('');
       expect(sm.url.host).toBe('localhost');
+      expect(sm.url.port).toBe(8080);
     });
 
     it('should parse wss scheme', () => {
@@ -133,6 +149,7 @@ describe('StateMachine', () => {
       expect(sm.url.username).toBe('');
       expect(sm.url.password).toBe('');
       expect(sm.url.host).toBe('localhost');
+      expect(sm.url.port).toBe(8080);
     });
   });
 });
